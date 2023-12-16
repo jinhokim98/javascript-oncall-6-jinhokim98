@@ -1,6 +1,6 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import CONDITION from '../constants/SystemCondition.js';
 import OutputView from '../view/OutputView.js';
-import CONDITION from '../constants/Condition.js';
 
 class SystemUtils {
   static seperateInputByCommaMonthAndDay(input) {

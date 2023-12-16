@@ -1,5 +1,5 @@
-import CONDITION from '../constants/Condition.js';
 import MESSAGE from '../constants/Message.js';
+import CONDITION from '../constants/SystemCondition.js';
 
 class WorkerTable {
   #monthAndDay;

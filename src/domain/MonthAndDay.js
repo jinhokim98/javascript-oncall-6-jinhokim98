@@ -1,4 +1,4 @@
-import CONDITION from '../constants/Condition.js';
+import CONDITION from '../constants/SystemCondition.js';
 import Validator from '../utils/Validator.js';
 
 class MonthAndDay {

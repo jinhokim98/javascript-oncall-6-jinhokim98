@@ -1,5 +1,5 @@
-import CONDITION from '../constants/Condition.js';
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import CONDITION from '../constants/SystemCondition.js';
 import SystemUtils from './SystemUtils.js';
 
 class Validator {
