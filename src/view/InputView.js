@@ -11,6 +11,11 @@ class InputView {
     const input = await Console.readLineAsync(MESSAGE.INPUT_WEEKDAY_WORKERS);
     return input;
   }
+
+  static async readHolidayWorkers() {
+    const input = await Console.readLineAsync(MESSAGE.INPUT_HOLIDAY_WORKERS);
+    return input;
+  }
 }
 
 export default InputView;
