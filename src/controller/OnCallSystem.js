@@ -15,6 +15,7 @@ class OnCallSystem {
     const workerTable = new WorkerTable(monthAndDay, weekdayWorkers, holidayWorkers);
     workerTable.planWorkerTable();
     OnCallSystem.printWorkerTableInfo(workerTable.loadWorkerTableResultMessage());
+    this.end();
   }
 
   start() {
@@ -45,6 +46,10 @@ class OnCallSystem {
     workersInfo.forEach((workerInfo) => {
       OutputView.printWorkerInfoByDate(workerInfo);
     });
+  }
+
+  end() {
+    return this;
   }
 }
 
