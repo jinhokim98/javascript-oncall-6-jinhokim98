@@ -1,10 +1,15 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
 import OutputView from '../view/OutputView.js';
+import CONDITION from '../constants/Condition.js';
 
 class SystemUtils {
-  static seperateInputByComma(input) {
+  static seperateInputByCommaMonthAndDay(input) {
     if (input === '') {
-      throw new Error(ERROR_MESSAGE.EMTPY_INPUT);
+      throw new Error(ERROR_MESSAGE.EMPTY_INPUT);
+    }
+
+    if (input.split(',').length > CONDITION.MONTH_AND_DAY.MAX_LENGTH) {
+      throw new Error(ERROR_MESSAGE.OVER_INPUT);
     }
 
     return input.split(',');

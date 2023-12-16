@@ -1,9 +1,11 @@
+import MonthAndDay from '../domain/MonthAndDay.js';
+import SystemUtils from '../utils/SystemUtils.js';
 import InputView from '../view/InputView.js';
 
 class OnCallSystem {
   async init() {
     this.start();
-    await OnCallSystem.inputMonthAndDay();
+    await SystemUtils.repeatUntilValidInput(OnCallSystem.inputMonthAndDay);
   }
 
   start() {
@@ -12,7 +14,10 @@ class OnCallSystem {
 
   static async inputMonthAndDay() {
     const input = await InputView.readWeekdayWorkers();
-    return input;
+    const seperatedInput = SystemUtils.seperateInputByCommaMonthAndDay(input);
+    const monthAndDay = new MonthAndDay(seperatedInput[0], seperatedInput[1]);
+
+    return monthAndDay;
   }
 }
 

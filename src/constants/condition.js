@@ -23,6 +23,9 @@ const CONDITION = {
     { month: 10, day: 9 },
     { month: 12, day: 25 },
   ],
+  MONTH_AND_DAY: {
+    MAX_LENGTH: 2,
+  },
 };
 
 Object.freeze(CONDITION);
