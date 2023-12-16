@@ -32,12 +32,28 @@ class HolidayWorkers {
   }
 
   changeWorkerForContinuouslyWork() {
+    if (this.#currentWorkerIndex === this.#holidayWorkers.length - 1) {
+      this.changeWorkerForHolidayLastWorkers();
+      return;
+    }
+
     const newHolidayWorkers = [...this.#holidayWorkers];
     const nextWorker = newHolidayWorkers[this.#currentWorkerIndex + 1];
     const currentWorker = newHolidayWorkers[this.#currentWorkerIndex];
 
     newHolidayWorkers[this.#currentWorkerIndex] = nextWorker;
     newHolidayWorkers[this.#currentWorkerIndex + 1] = currentWorker;
+
+    this.#holidayWorkers = newHolidayWorkers;
+  }
+
+  changeWorkerForHolidayLastWorkers() {
+    const newHolidayWorkers = [...this.#holidayWorkers];
+    const nextWorker = newHolidayWorkers[0];
+    const currentWorker = newHolidayWorkers[this.#currentWorkerIndex];
+
+    newHolidayWorkers[this.#currentWorkerIndex] = nextWorker;
+    newHolidayWorkers[0] = currentWorker;
 
     this.#holidayWorkers = newHolidayWorkers;
   }

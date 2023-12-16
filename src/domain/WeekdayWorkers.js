@@ -32,12 +32,28 @@ class WeekdayWorkers {
   }
 
   changeWorkerForContinuouslyWork() {
+    if (this.#currentWorkerIndex === this.#weekdayWorkers.length - 1) {
+      this.changeWorkerForWeekdayLastWorkers();
+      return;
+    }
+
     const newWeekdayWorkers = [...this.#weekdayWorkers];
     const nextWorker = newWeekdayWorkers[this.#currentWorkerIndex + 1];
     const currentWorker = newWeekdayWorkers[this.#currentWorkerIndex];
 
     newWeekdayWorkers[this.#currentWorkerIndex] = nextWorker;
     newWeekdayWorkers[this.#currentWorkerIndex + 1] = currentWorker;
+
+    this.#weekdayWorkers = newWeekdayWorkers;
+  }
+
+  changeWorkerForWeekdayLastWorkers() {
+    const newWeekdayWorkers = [...this.#weekdayWorkers];
+    const nextWorker = newWeekdayWorkers[0];
+    const currentWorker = newWeekdayWorkers[this.#currentWorkerIndex];
+
+    newWeekdayWorkers[this.#currentWorkerIndex] = nextWorker;
+    newWeekdayWorkers[0] = currentWorker;
 
     this.#weekdayWorkers = newWeekdayWorkers;
   }
