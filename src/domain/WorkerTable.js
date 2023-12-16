@@ -1,3 +1,6 @@
+import CONDITION from '../constants/Condition.js';
+import MESSAGE from '../constants/Message.js';
+
 class WorkerTable {
   #monthAndDay;
 
@@ -15,9 +18,9 @@ class WorkerTable {
 
   planWorkerTable() {
     const dayInfo = this.#monthAndDay.getDayOfWeekInfoOneMonth();
-    dayInfo.forEach(({ _, isHoliday }, index) => {
+    dayInfo.forEach(({ day, isHoliday }, index) => {
       const currentWorker = this.getCurrentWorker(index);
-      this.#planWorkerTableByDay(isHoliday, currentWorker);
+      this.#planWorkerTableByDay(day, isHoliday, currentWorker);
     });
   }
 
@@ -28,23 +31,47 @@ class WorkerTable {
     return this.#table[index];
   }
 
-  #planWorkerTableByDay(isHoliday, currentWorker) {
+  #planWorkerTableByDay(day, isHoliday, currentWorker) {
     if (!isHoliday) {
-      this.#planWorkerTableByWeekday(currentWorker);
+      this.#planWorkerTableByWeekday(day, currentWorker);
       return;
     }
 
-    this.#planWorkerTableByHoliday(currentWorker);
+    this.#planWorkerTableByHoliday(day, currentWorker);
   }
 
-  #planWorkerTableByWeekday(currentWorker) {
+  #planWorkerTableByWeekday(day, currentWorker) {
     const worker = this.#weekdayWorkers.getNextWorker(currentWorker);
-    this.#table.push(worker);
+    this.#table.push({ day, worker, isHoliday: false });
   }
 
-  #planWorkerTableByHoliday(currentWorker) {
+  #planWorkerTableByHoliday(day, currentWorker) {
     const worker = this.#holidayWorkers.getNextWorker(currentWorker);
-    this.#table.push(worker);
+    this.#table.push({ day, worker, isHoliday: true });
+  }
+
+  loadWorkerTableResultMessage() {
+    return this.#table.map((date, index) => this.#loadWorkerTableResultByDay(date, index));
+  }
+
+  #loadWorkerTableResultByDay(date, index) {
+    return MESSAGE.printWorkerInfoByDay(
+      this.#monthAndDay.getMonthString(),
+      index + 1,
+      date.day,
+      WorkerTable.makeMessageLegalHoliday(date.day, date.isHoliday),
+      date.worker,
+    );
+  }
+
+  static makeMessageLegalHoliday(day, isHoliday) {
+    const dayIndex = CONDITION.DAY_OF_WEEK.findIndex((dayOfWeek) => day === dayOfWeek);
+
+    if (dayIndex < 5 && isHoliday) {
+      return MESSAGE.LEGAL_HOLIDAY;
+    }
+
+    return '';
   }
 }
 

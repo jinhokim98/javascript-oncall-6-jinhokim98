@@ -26,6 +26,10 @@ class MonthAndDay {
     return CONDITION.MONTH[this.#month];
   }
 
+  getMonthString() {
+    return `${this.#month}월`;
+  }
+
   getDayOfWeekInfoOneMonth() {
     const endDay = this.getEndDay();
     const startDayIndex = CONDITION.DAY_OF_WEEK.findIndex((dayOfWeek) => dayOfWeek === this.#dayOfWeek);

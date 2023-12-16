@@ -4,6 +4,7 @@ import InputView from '../view/InputView.js';
 import WeekdayWorkers from '../domain/WeekdayWorkers.js';
 import HolidayWorkers from '../domain/HolidayWorkers.js';
 import WorkerTable from '../domain/WorkerTable.js';
+import OutputView from '../view/OutputView.js';
 
 class OnCallSystem {
   async init() {
@@ -13,6 +14,7 @@ class OnCallSystem {
 
     const workerTable = new WorkerTable(monthAndDay, weekdayWorkers, holidayWorkers);
     workerTable.planWorkerTable();
+    OnCallSystem.printWorkerTableInfo(workerTable.loadWorkerTableResultMessage());
   }
 
   start() {
@@ -37,6 +39,12 @@ class OnCallSystem {
     const holidayWorkers = new HolidayWorkers(seperatedHolidayWorkers);
 
     return { weekdayWorkers, holidayWorkers };
+  }
+
+  static printWorkerTableInfo(workersInfo) {
+    workersInfo.forEach((workerInfo) => {
+      OutputView.printWorkerInfoByDate(workerInfo);
+    });
   }
 }
 
