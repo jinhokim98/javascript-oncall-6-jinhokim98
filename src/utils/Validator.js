@@ -1,5 +1,6 @@
 import CONDITION from '../constants/Condition.js';
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import SystemUtils from './SystemUtils.js';
 
 class Validator {
   static isNotEmpty(input) {
@@ -28,6 +29,12 @@ class Validator {
 
   static isWorkersLength(workers) {
     if (workers.length < CONDITION.WORKER.MIN || workers.length > CONDITION.WORKER.MAX) {
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+    }
+  }
+
+  static isNotDuplicateWorkers(workers) {
+    if (workers.find((worker) => SystemUtils.isDuplicateInList(workers, worker)) !== undefined) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
   }

@@ -39,6 +39,10 @@ class SystemUtils {
       if (input !== undefined) return input;
     }
   }
+
+  static isDuplicateInList(list, element) {
+    return list.indexOf(element) !== list.lastIndexOf(element);
+  }
 }
 
 export default SystemUtils;
