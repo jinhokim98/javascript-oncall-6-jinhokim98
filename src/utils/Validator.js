@@ -25,6 +25,12 @@ class Validator {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
   }
+
+  static isWorkersLength(workers) {
+    if (workers.length < CONDITION.WORKER.MIN || workers.length > CONDITION.WORKER.MAX) {
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+    }
+  }
 }
 
 export default Validator;

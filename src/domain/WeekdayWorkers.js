@@ -10,6 +10,7 @@ class WeekdayWorkers {
 
   static #validator(weekdayWorkers) {
     Validator.isOverThanNicknameLength(weekdayWorkers);
+    Validator.isWorkersLength(weekdayWorkers);
   }
 }
 
