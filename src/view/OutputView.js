@@ -5,6 +5,10 @@ class OutputView {
     Console.print(error.message);
   }
 
+  static printNewLine() {
+    Console.print('');
+  }
+
   static printWorkerInfoByDate(byDateMessage) {
     Console.print(byDateMessage);
   }

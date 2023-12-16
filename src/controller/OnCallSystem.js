@@ -43,6 +43,8 @@ class OnCallSystem {
   }
 
   static printWorkerTableInfo(workersInfo) {
+    OutputView.printNewLine();
+
     workersInfo.forEach((workerInfo) => {
       OutputView.printWorkerInfoByDate(workerInfo);
     });
