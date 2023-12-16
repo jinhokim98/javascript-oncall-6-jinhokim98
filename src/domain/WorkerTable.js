@@ -68,7 +68,7 @@ class WorkerTable {
   static makeMessageLegalHoliday(day, isHoliday) {
     const dayIndex = CONDITION.DAY_OF_WEEK.findIndex((dayOfWeek) => day === dayOfWeek);
 
-    if (dayIndex < 5 && isHoliday) {
+    if (dayIndex < CONDITION.SATURDAY && isHoliday) {
       return MESSAGE.LEGAL_HOLIDAY;
     }
 

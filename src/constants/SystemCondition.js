@@ -17,6 +17,7 @@ const CONDITION = {
     START: 1,
     END: 12,
   },
+  SATURDAY: 5,
   DAY_OF_WEEK: ['월', '화', '수', '목', '금', '토', '일'],
   HOLIDAY: [
     { month: 1, day: 1 },

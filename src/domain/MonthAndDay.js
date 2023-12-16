@@ -48,7 +48,7 @@ class MonthAndDay {
   }
 
   isHoliday(dayIndex, currentDay) {
-    if (dayIndex >= 5) {
+    if (dayIndex >= CONDITION.SATURDAY) {
       return true;
     }
 
