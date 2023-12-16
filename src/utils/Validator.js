@@ -13,6 +13,12 @@ class Validator {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT_MONTH);
     }
   }
+
+  static isDayOfWeekForm(dayOfWeek) {
+    if (!CONDITION.DAY_OF_WEEK.includes(dayOfWeek)) {
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT_DAY_OF_WEEK);
+    }
+  }
 }
 
 export default Validator;

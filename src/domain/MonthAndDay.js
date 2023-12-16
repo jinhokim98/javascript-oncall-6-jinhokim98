@@ -3,21 +3,23 @@ import Validator from '../utils/Validator.js';
 class MonthAndDay {
   #month;
 
-  #day;
+  #dayOfWeek;
 
-  constructor(month, day) {
+  constructor(month, dayOfWeek) {
     MonthAndDay.#monthValidator(month);
-    MonthAndDay.#dayValidator(day);
+    MonthAndDay.#dayValidator(dayOfWeek);
 
     this.#month = month;
-    this.#day = day;
+    this.#dayOfWeek = dayOfWeek;
   }
 
   static #monthValidator(month) {
     Validator.isMonthForm(month);
   }
 
-  static #dayValidator(day) {}
+  static #dayValidator(dayOfWeek) {
+    Validator.isDayOfWeekForm(dayOfWeek);
+  }
 }
 
 export default MonthAndDay;
