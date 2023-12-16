@@ -16,15 +16,30 @@ class WeekdayWorkers {
     Validator.isNotDuplicateWorkers(weekdayWorkers);
   }
 
-  getNextWorker() {
-    if (this.#currentWorkerIndex > this.#weekdayWorkers.length) {
+  getNextWorker(currentWorker) {
+    if (this.#currentWorkerIndex >= this.#weekdayWorkers.length) {
       this.#currentWorkerIndex = 0;
+    }
+
+    if (currentWorker === this.#weekdayWorkers[this.#currentWorkerIndex]) {
+      this.changeWorkerForContinuouslyWork();
     }
 
     const nextWorker = this.#weekdayWorkers[this.#currentWorkerIndex];
     this.#currentWorkerIndex += 1;
 
     return nextWorker;
+  }
+
+  changeWorkerForContinuouslyWork() {
+    const newWeekdayWorkers = [...this.#weekdayWorkers];
+    const nextWorker = newWeekdayWorkers[this.#currentWorkerIndex + 1];
+    const currentWorker = newWeekdayWorkers[this.#currentWorkerIndex];
+
+    newWeekdayWorkers[this.#currentWorkerIndex] = nextWorker;
+    newWeekdayWorkers[this.#currentWorkerIndex + 1] = currentWorker;
+
+    this.#weekdayWorkers = newWeekdayWorkers;
   }
 }
 

@@ -15,26 +15,37 @@ class WorkerTable {
 
   planWorkerTable() {
     const dayInfo = this.#monthAndDay.getDayOfWeekInfoOneMonth();
-    dayInfo.forEach(({ day, isHoliday }, index) => {
-      this.#planWorkerTableByDay(day, isHoliday, index);
+    dayInfo.forEach(({ _, isHoliday }, index) => {
+      const currentWorker = this.getCurrentWorker(index);
+      this.#planWorkerTableByDay(isHoliday, currentWorker);
     });
   }
 
-  #planWorkerTableByDay(isHoliday, index) {
+  getCurrentWorker(index) {
+    if (index === 0) {
+      return '';
+    }
+    return this.#table[index];
+  }
+
+  #planWorkerTableByDay(isHoliday, currentWorker) {
     if (!isHoliday) {
-      this.#planWorkerTableByWeekday();
+      this.#planWorkerTableByWeekday(currentWorker);
       return;
     }
 
-    this.#planWorkerTableByHoliday();
+    this.#planWorkerTableByHoliday(currentWorker);
   }
 
-  #planWorkerTableByWeekday() {
-    const worker = this.#weekdayWorkers.getNextWorker();
+  #planWorkerTableByWeekday(currentWorker) {
+    const worker = this.#weekdayWorkers.getNextWorker(currentWorker);
     this.#table.push(worker);
   }
 
-  #planWorkerTableByHoliday() {}
+  #planWorkerTableByHoliday(currentWorker) {
+    const worker = this.#holidayWorkers.getNextWorker(currentWorker);
+    this.#table.push(worker);
+  }
 }
 
 export default WorkerTable;

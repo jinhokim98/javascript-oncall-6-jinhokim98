@@ -3,6 +3,8 @@ import Validator from '../utils/Validator.js';
 class HolidayWorkers {
   #holidayWorkers;
 
+  #currentWorkerIndex = 0;
+
   constructor(holidayWorkers) {
     HolidayWorkers.#validator(holidayWorkers);
     this.#holidayWorkers = holidayWorkers;
@@ -12,6 +14,32 @@ class HolidayWorkers {
     Validator.isOverThanNicknameLength(holidayWorkers);
     Validator.isWorkersLength(holidayWorkers);
     Validator.isNotDuplicateWorkers(holidayWorkers);
+  }
+
+  getNextWorker(currentWorker) {
+    if (this.#currentWorkerIndex >= this.#holidayWorkers.length) {
+      this.#currentWorkerIndex = 0;
+    }
+
+    if (currentWorker === this.#holidayWorkers[this.#currentWorkerIndex]) {
+      this.changeWorkerForContinuouslyWork();
+    }
+
+    const nextWorker = this.#holidayWorkers[this.#currentWorkerIndex];
+    this.#currentWorkerIndex += 1;
+
+    return nextWorker;
+  }
+
+  changeWorkerForContinuouslyWork() {
+    const newHolidayWorkers = [...this.#holidayWorkers];
+    const nextWorker = newHolidayWorkers[this.#currentWorkerIndex + 1];
+    const currentWorker = newHolidayWorkers[this.#currentWorkerIndex];
+
+    newHolidayWorkers[this.#currentWorkerIndex] = nextWorker;
+    newHolidayWorkers[this.#currentWorkerIndex + 1] = currentWorker;
+
+    this.#holidayWorkers = newHolidayWorkers;
   }
 }
 
