@@ -16,12 +16,12 @@ class HolidayWorkers {
     Validator.isNotDuplicateWorkers(holidayWorkers);
   }
 
-  getNextWorker(currentWorker) {
+  getNextWorker(yesterdayWorker) {
     if (this.#currentWorkerIndex >= this.#holidayWorkers.length) {
       this.#currentWorkerIndex = 0;
     }
 
-    if (currentWorker === this.#holidayWorkers[this.#currentWorkerIndex]) {
+    if (yesterdayWorker === this.#holidayWorkers[this.#currentWorkerIndex]) {
       this.changeWorkerForContinuouslyWork();
     }
 

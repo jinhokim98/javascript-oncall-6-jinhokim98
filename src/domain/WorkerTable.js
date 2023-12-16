@@ -19,34 +19,35 @@ class WorkerTable {
   planWorkerTable() {
     const dayInfo = this.#monthAndDay.getDayOfWeekInfoOneMonth();
     dayInfo.forEach(({ day, isHoliday }, index) => {
-      const currentWorker = this.getCurrentWorker(index);
-      this.#planWorkerTableByDay(day, isHoliday, currentWorker);
+      const yesterdayWorker = this.getYesterdayWorker(index);
+      this.#planWorkerTableByDay(day, isHoliday, yesterdayWorker);
     });
   }
 
-  getCurrentWorker(index) {
+  getYesterdayWorker(index) {
     if (index === 0) {
       return '';
     }
-    return this.#table[index];
+
+    return this.#table[index - 1].worker;
   }
 
-  #planWorkerTableByDay(day, isHoliday, currentWorker) {
+  #planWorkerTableByDay(day, isHoliday, yesterdayWorker) {
     if (!isHoliday) {
-      this.#planWorkerTableByWeekday(day, currentWorker);
+      this.#planWorkerTableByWeekday(day, yesterdayWorker);
       return;
     }
 
-    this.#planWorkerTableByHoliday(day, currentWorker);
+    this.#planWorkerTableByHoliday(day, yesterdayWorker);
   }
 
-  #planWorkerTableByWeekday(day, currentWorker) {
-    const worker = this.#weekdayWorkers.getNextWorker(currentWorker);
+  #planWorkerTableByWeekday(day, yesterdayWorker) {
+    const worker = this.#weekdayWorkers.getNextWorker(yesterdayWorker);
     this.#table.push({ day, worker, isHoliday: false });
   }
 
-  #planWorkerTableByHoliday(day, currentWorker) {
-    const worker = this.#holidayWorkers.getNextWorker(currentWorker);
+  #planWorkerTableByHoliday(day, yesterdayWorker) {
+    const worker = this.#holidayWorkers.getNextWorker(yesterdayWorker);
     this.#table.push({ day, worker, isHoliday: true });
   }
 
