@@ -1,3 +1,5 @@
+import Validator from '../utils/Validator.js';
+
 class MonthAndDay {
   #month;
 
@@ -11,7 +13,9 @@ class MonthAndDay {
     this.#day = day;
   }
 
-  static #monthValidator(month) {}
+  static #monthValidator(month) {
+    Validator.isMonthForm(month);
+  }
 
   static #dayValidator(day) {}
 }
