@@ -19,6 +19,12 @@ class Validator {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT_DAY_OF_WEEK);
     }
   }
+
+  static isOverThanNicknameLength(nicknames) {
+    if (nicknames.find((nickname) => nickname.length > CONDITION.WORKER.NICKNAME_MAX_LENGTH) !== undefined) {
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+    }
+  }
 }
 
 export default Validator;

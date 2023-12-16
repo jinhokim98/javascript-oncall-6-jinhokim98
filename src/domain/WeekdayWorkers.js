@@ -1,3 +1,5 @@
+import Validator from '../utils/Validator.js';
+
 class WeekdayWorkers {
   #weekdayWorkers;
 
@@ -6,7 +8,9 @@ class WeekdayWorkers {
     this.#weekdayWorkers = weekdayWorkers;
   }
 
-  static #validator(weekdayWorkers) {}
+  static #validator(weekdayWorkers) {
+    Validator.isOverThanNicknameLength(weekdayWorkers);
+  }
 }
 
 export default WeekdayWorkers;

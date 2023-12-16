@@ -1,6 +1,7 @@
 import MonthAndDay from '../domain/MonthAndDay.js';
 import SystemUtils from '../utils/SystemUtils.js';
 import InputView from '../view/InputView.js';
+import WeekdayWorkers from '../domain/WeekdayWorkers.js';
 
 class OnCallSystem {
   async init() {
@@ -24,6 +25,9 @@ class OnCallSystem {
   static async inputWorkers() {
     const weekdayWorkerInput = await InputView.readWeekdayWorkers();
     const seperatedWeekdayWorkers = SystemUtils.seperateInputByCommaWorkers(weekdayWorkerInput);
+
+    const weekdayWorkers = new WeekdayWorkers(seperatedWeekdayWorkers);
+    return weekdayWorkers;
   }
 }
 

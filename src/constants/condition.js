@@ -31,6 +31,11 @@ const CONDITION = {
   MONTH_AND_DAY: {
     MAX_LENGTH: 2,
   },
+  WORKER: {
+    NICKNAME_MAX_LENGTH: 5,
+    MIN: 5,
+    MAX: 35,
+  },
 };
 
 Object.freeze(CONDITION);
