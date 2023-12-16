@@ -1,3 +1,4 @@
+import CONDITION from '../constants/Condition.js';
 import Validator from '../utils/Validator.js';
 
 class MonthAndDay {
@@ -9,7 +10,7 @@ class MonthAndDay {
     MonthAndDay.#monthValidator(month);
     MonthAndDay.#dayValidator(dayOfWeek);
 
-    this.#month = month;
+    this.#month = Number(month);
     this.#dayOfWeek = dayOfWeek;
   }
 
@@ -19,6 +20,10 @@ class MonthAndDay {
 
   static #dayValidator(dayOfWeek) {
     Validator.isDayOfWeekForm(dayOfWeek);
+  }
+
+  getEndDay() {
+    return CONDITION.MONTH[this.#month];
   }
 }
 

@@ -3,12 +3,15 @@ import SystemUtils from '../utils/SystemUtils.js';
 import InputView from '../view/InputView.js';
 import WeekdayWorkers from '../domain/WeekdayWorkers.js';
 import HolidayWorkers from '../domain/HolidayWorkers.js';
+import WorkerTable from '../domain/WorkerTable.js';
 
 class OnCallSystem {
   async init() {
     this.start();
     const monthAndDay = await SystemUtils.repeatUntilValidInput(OnCallSystem.inputMonthAndDay);
-    await SystemUtils.repeatUntilValidInput(OnCallSystem.inputWorkers);
+    const { weekdayWorkers, holidayWorkers } = await SystemUtils.repeatUntilValidInput(OnCallSystem.inputWorkers);
+
+    const workerTable = new WorkerTable(monthAndDay, weekdayWorkers, holidayWorkers);
   }
 
   start() {
