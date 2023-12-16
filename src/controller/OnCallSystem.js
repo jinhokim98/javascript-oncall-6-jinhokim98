@@ -12,6 +12,7 @@ class OnCallSystem {
     const { weekdayWorkers, holidayWorkers } = await SystemUtils.repeatUntilValidInput(OnCallSystem.inputWorkers);
 
     const workerTable = new WorkerTable(monthAndDay, weekdayWorkers, holidayWorkers);
+    workerTable.planWorkerTable();
   }
 
   start() {
