@@ -15,6 +15,14 @@ class SystemUtils {
     return input.split(',');
   }
 
+  static seperateInputByCommaWorkers(input) {
+    if (input === '') {
+      throw new Error(ERROR_MESSAGE.EMPTY_INPUT);
+    }
+
+    return input.split(',');
+  }
+
   static async #tryInput(func, ...args) {
     try {
       const input = await func(...args);
